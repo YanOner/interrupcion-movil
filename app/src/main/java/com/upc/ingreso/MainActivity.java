@@ -100,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
                 nombreUsuario = usuario.getNombre();
                 Toast.makeText(getApplicationContext(),usuario.getNombre(),Toast.LENGTH_LONG).show();
                 Intent i = new Intent(getApplicationContext(),com.upc.menu.Menu.class);
+                //Intent i = new Intent(getApplicationContext(),com.upc.menu.activity_menu1.class);
                 startActivity(i);
             }else{
                 Toast.makeText(getApplicationContext(),usuario.getMensaje(),Toast.LENGTH_LONG).show();

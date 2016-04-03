@@ -9,4 +9,8 @@
     <string name="title_activity_cuadrillas">CUADRILLAS</string>
     <string name="title_activity_ordenes_atencion">INTERRUPCIONES ASIGNADAS</string>
     <string name="title_activity_generar_informe">GENERAR INFORME</string>
+    <string name="title_activity_activity_menu1">activity_menu1</string>
+    <string name="title_activity_consultar_ticket">consultarTicket</string>
+    <string name="abierto">Abierto</string>
+    <string name="cerrado">Cerrado</string>
 </resources>
