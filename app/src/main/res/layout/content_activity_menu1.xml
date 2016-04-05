@@ -1,6 +1,6 @@
 <android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/contenedorPrincipal"
+    android:id="@+id/contenedorPrincipald"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <!-- Contenedor de Frame-->
@@ -12,11 +12,11 @@
     <!-- Menu de la Izquierda-->
 
     <ListView
-        android:layout_width="240px"
+        android:layout_width="400px"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:id="@+id/menuIzq"
-        android:background="#111"
+        android:id="@+id/menuIzqd"
+        android:background="#8B0000"
         android:choiceMode="singleChoice">
 
     </ListView>

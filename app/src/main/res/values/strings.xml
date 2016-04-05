@@ -13,4 +13,5 @@
     <string name="title_activity_consultar_ticket">consultarTickets</string>
     <string name="abierto">Abierto</string>
     <string name="cerrado">Cerrado</string>
+    <string name="title_activity_consultar_tickets">ConsultarTickets</string>
 </resources>
