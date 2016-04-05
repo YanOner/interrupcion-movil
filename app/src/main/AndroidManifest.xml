@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.upc.ingreso" >
+    package="com.upc.ingreso">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -9,11 +9,11 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,47 +23,38 @@
         <activity
             android:name=".Password"
             android:label="@string/title_activity_password"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.upc.menu.Menu"
             android:label="@string/title_activity_menu"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.upc.interrupcion.Interrupcion"
             android:label="@string/title_activity_interrupcion"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.upc.interrupcion.Cuadrillas"
             android:label="@string/title_activity_cuadrillas"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.upc.interrupcion.OrdenesAtencion"
             android:label="@string/title_activity_ordenes_atencion"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.upc.interrupcion.GenerarInforme"
             android:label="@string/title_activity_generar_informe"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.upc.interrupcion.InterrupcionDetalle"
-            android:label="DETALLE" >
-        </activity>
+            android:label="DETALLE" />
         <activity
             android:name="com.upc.interrupcion.CuadrillaDetalle"
-            android:label="DETALLE" >
-        </activity>
+            android:label="DETALLE" />
         <activity
             android:name="com.upc.interrupcion.OrdenAtencionDetalle"
-            android:label="DETALLE" >
-        </activity>
-        <activity android:name="com.upc.interrupcion.informe_detalle" >
-        </activity>
+            android:label="DETALLE" />
+        <activity android:name="com.upc.interrupcion.informe_detalle" />
+        <activity android:name="com.upc.menu.activity_menu1"/>
     </application>
 
 </manifest>
