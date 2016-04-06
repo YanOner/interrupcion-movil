@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">INTERRUPCIONES</string>
+    <string name="app_name">MENÚ</string>
     <string name="action_settings">CONFIGURACIÓN</string>
     <string name="title_activity_main">ACCEDER AL SISTEMA</string>
     <string name="title_activity_password">RECUPERAR CONTRASEÑA</string>

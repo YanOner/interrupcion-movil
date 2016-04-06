@@ -77,7 +77,7 @@ public class Interrupcion extends AppCompatActivity {
     }
 
     public void irConsultarCuadrilla(View v){
-        //PRUEBA
+
         seleccinado = " ";
         if(!seleccinado.equalsIgnoreCase("")){
             Intent i = new Intent(this,Cuadrillas.class);
