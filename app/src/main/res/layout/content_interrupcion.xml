@@ -41,6 +41,24 @@
                 android:id="@+id/listViewInterrupciones" />
         </LinearLayout>
 
+
+        <Button
+            android:background="@drawable/button"
+            android:id="@+id/button5"
+            android:text="CONSULTAR CUADRILLAS DISPONIBLES"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            style="@style/button_text" />
+
+        <Button
+            android:background="@drawable/button"
+            android:id="@+id/button10"
+            android:text="REGRESAR"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            style="@style/button_text"
+            android:onClick="regresar"/>
+<!--
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,21 +67,23 @@
             android:layout_gravity="center_horizontal"
             android:textColor="@android:color/background_light"
             android:background="@android:color/holo_red_dark"
+            android:background="@drawable/red_button"
             android:layout_margin="10dp"
             android:textAlignment="center"
             android:onClick="irConsultarCuadrilla" />
 
+
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Regresar"
-            android:id="@+id/button10"
-            android:layout_gravity="center_horizontal"
-            android:textColor="@android:color/background_light"
-            android:background="@android:color/holo_red_dark"
-            android:layout_margin="10dp"
-            android:textAlignment="center"
-            android:onClick="regresar" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Regresar"
+        android:id="@+id/button10"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@android:color/background_light"
+        android:background="@android:color/holo_red_dark"
+        android:layout_margin="10dp"
+        android:textAlignment="center"
+        android:onClick="regresar" />-->
 
     </LinearLayout>
 </RelativeLayout>
