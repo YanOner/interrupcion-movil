@@ -8,14 +8,14 @@
         android:layout_width="match_parent"
         android:id="@+id/contenedorFrame"
         android:layout_height="match_parent"
-        android:background="@mipmap/imagen" />
+        android:background="@mipmap/pantalla01" />
 
 
 
     <!-- Menu de la Izquierda-->
 
     <ListView
-        android:layout_width="400px"
+        android:layout_width="450px"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:id="@+id/menuIzqd"

@@ -18,9 +18,9 @@ public class InterrupcionDetalle extends AppCompatActivity {
             ((TextView)findViewById(R.id.textViewInterrupcionDetalle)).setText(texto);
         }
     }
-
+    /*
     public void regresar(View v){
         finish();
     }
-
+*/
 }

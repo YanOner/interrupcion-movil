@@ -74,11 +74,11 @@ public class GenerarInforme extends AppCompatActivity {
                     "SELECCIONE UN INFORME", Toast.LENGTH_SHORT).show();
         }
     }
-
+/*
     public void regresar(View v){
         finish();
     }
-
+*/
     private class HttpRequestTask extends AsyncTask<Void, Void, List<InformeBean>> {
         @Override
         protected List<InformeBean> doInBackground(Void... params) {

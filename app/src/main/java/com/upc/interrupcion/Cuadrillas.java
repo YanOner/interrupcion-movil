@@ -72,11 +72,11 @@ public class Cuadrillas extends AppCompatActivity {
                     "SELECCIONE UNA CUADRILLA", Toast.LENGTH_SHORT).show();
         }
     }
-
+/*
     public void regresar(View v){
         finish();
     }
-
+*/
     private class HttpRequestTask extends AsyncTask<Void, Void, List<CuadrillaBean>> {
         @Override
         protected List<CuadrillaBean> doInBackground(Void... params) {

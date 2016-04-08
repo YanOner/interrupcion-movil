@@ -72,10 +72,11 @@ public class OrdenesAtencion extends AppCompatActivity {
                     "SELECCIONE UNA ORDEN", Toast.LENGTH_SHORT).show();
         }
     }
-
+    /*
     public void regresar(View v){
         finish();
     }
+    */
 
     private class HttpRequestTask extends AsyncTask<Void, Void, List<OrdenAtencionBean>> {
         @Override

@@ -87,11 +87,11 @@ public class Interrupcion extends AppCompatActivity {
                     "SELECCIONE UNA INTERRUPCION", Toast.LENGTH_SHORT).show();
         }
     }
-
+/*
     public void regresar(View v){
         finish();
     }
-
+*/
     private class HttpRequestTask extends AsyncTask<Void, Void, List<InterrupcionBean>> {
         @Override
         protected List<InterrupcionBean> doInBackground(Void... params) {

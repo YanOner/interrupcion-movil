@@ -18,9 +18,9 @@ public class CuadrillaDetalle extends AppCompatActivity {
             ((TextView)findViewById(R.id.textViewCuadrillaDetalle)).setText(texto);
         }
     }
-
+/*
     public void regresar(View v){
         finish();
     }
-
+*/
 }

@@ -18,8 +18,9 @@ public class informe_detalle extends AppCompatActivity {
             ((TextView)findViewById(R.id.textViewInformeDetalle)).setText(texto);
         }
     }
-
+/*
     public void regresar(View v){
         finish();
     }
+*/
 }

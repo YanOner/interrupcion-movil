@@ -19,7 +19,7 @@ public class OrdenAtencionDetalle extends AppCompatActivity {
         }
     }
 
-    public void regresar(View v){
+    /*public void regresar(View v){
         finish();
-    }
+    }*/
 }
