@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.upc.ingreso.MainActivity;
 import com.upc.ingreso.R;
 import com.upc.model.OrdenAtencionBean;
+import com.upc.utility.services;
 
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
@@ -83,7 +84,7 @@ public class OrdenesAtencion extends AppCompatActivity {
         protected List<OrdenAtencionBean> doInBackground(Void... params) {
             Log.i("doInBackground", "inicio");
             try {
-                String url = "http://104.214.71.24:8080/RESTService/api/WOrdenAtencionLista/"+ MainActivity.codigoUsuario +"/P";
+                String url = services.WOrdenAtencionLista + MainActivity.codigoUsuario +"/P";
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
                 Object objetos = restTemplate.getForObject(url, Object.class);

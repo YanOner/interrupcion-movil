@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.upc.ingreso.MainActivity;
 import com.upc.ingreso.R;
 import com.upc.model.CuadrillaBean;
+import com.upc.utility.services;
 
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
@@ -82,7 +83,7 @@ public class Cuadrillas extends AppCompatActivity {
         protected List<CuadrillaBean> doInBackground(Void... params) {
             Log.i("doInBackground", "inicio");
             try {
-                String url = "http://104.214.71.24:8080/RESTService/api/WCuadrillaLista/"+ MainActivity.codigoUsuario +"/D";
+                String url = services.WCuadrillaLista+ MainActivity.codigoUsuario +"/D";
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
                 Object objetos = restTemplate.getForObject(url, Object.class);

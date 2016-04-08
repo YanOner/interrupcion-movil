@@ -41,7 +41,8 @@
             android:id="@+id/editText"
             android:layout_gravity="center_horizontal"
             android:textColor="@android:color/background_light"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:maxLength="10" />
 
         <Space
             android:layout_width="match_parent"
@@ -66,7 +67,8 @@
             android:id="@+id/editText2"
             android:layout_gravity="center_horizontal"
             android:textColor="@android:color/background_light"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:maxLength="10" />
 
         <Space
             android:layout_width="match_parent"

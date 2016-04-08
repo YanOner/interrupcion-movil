@@ -13,12 +13,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.upc.model.Usuario;
+import com.upc.utility.services;
+
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
+
 
 import java.util.LinkedHashMap;
 
@@ -116,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
             Log.i("doInBackground", "inicio");
             try {
                 //String url = "http://104.214.71.24:8080/RESTService/api/WInterrupcionLista/"+ MainActivity.codigoUsuario +"/D";
-                String url = "http://10.0.2.2:8080/ws-cxf-sgi/api/ws/WValidarUsuario/"+usuarioLogin+"/"+password;
+                String url = services.ValidarUsuario+usuarioLogin+"/"+password;
                 Log.i("URL", url);
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());

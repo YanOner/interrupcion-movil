@@ -21,6 +21,7 @@ import com.fasterxml.jackson.databind.util.BeanUtil;
 import com.upc.ingreso.MainActivity;
 import com.upc.ingreso.R;
 import com.upc.model.InterrupcionBean;
+import com.upc.utility.services;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.BeanUtilsBean;
@@ -97,7 +98,7 @@ public class Interrupcion extends AppCompatActivity {
         protected List<InterrupcionBean> doInBackground(Void... params) {
             Log.i("doInBackground", "inicio");
             try {
-                String url = "http://104.214.71.24:8080/RESTService/api/WInterrupcionLista/"+ MainActivity.codigoUsuario +"/D";
+                String url = services.WInterrupcionLista+ MainActivity.codigoUsuario +"/D";
                 Log.i("URL",url);
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
