@@ -17,6 +17,10 @@ import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.LinkedHashMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -109,46 +113,25 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Usuario doInBackground(Void... params) {
             Usuario usuario = new Usuario();
-
-            //final String URL="http://10.0.2.2:8080/ws-cxf-sgi/ws/ws/interrupcionService?wsdl";
-            final String URL="http://104.214.71.24:9090/ws-cxf-sgii/ws/ws/interrupcionService?wsdl";
-            final String NAMESPACE = "http://ws.interrupciones.upc.com/";
-            final String METHOD_NAME = "validarUsuario";
-            final String SOAP_ACTION = "";//"http://ws.interrupciones.upc.com/validarUsuario";
-
-            SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
-
-            request.addProperty("arg0",usuarioLogin);
-            request.addProperty("arg1",password);
-
-            SoapSerializationEnvelope envelope =
-                    new SoapSerializationEnvelope(SoapEnvelope.VER11);
-            envelope.dotNet = false;
-
-            envelope.setOutputSoapObject(request);
-
-            HttpTransportSE transporte = new HttpTransportSE(URL,5000);
-
-            try
-            {
-                transporte.call(SOAP_ACTION, envelope);
-
-                SoapObject resSoap =(SoapObject)envelope.getResponse();
-                int total = resSoap.getPropertyCount();
-                Log.i("RESPONSE",resSoap.toString());
-                Log.i("TOTAL", "" + total);
-                for (int i=0;i<total;i++){
-                    Log.i("PROPIEDAD",""+resSoap.getProperty(i));
-                }
-                usuario.setCodigo(String.valueOf(resSoap.getPropertySafely("codigo")));
-                usuario.setNombre(String.valueOf(resSoap.getPropertySafely("nombre")));
-                String valido = String.valueOf(resSoap.getPropertySafely("valido"));
+            Log.i("doInBackground", "inicio");
+            try {
+                //String url = "http://104.214.71.24:8080/RESTService/api/WInterrupcionLista/"+ MainActivity.codigoUsuario +"/D";
+                String url = "http://10.0.2.2:8080/ws-cxf-sgi/api/ws/WValidarUsuario/"+usuarioLogin+"/"+password;
+                Log.i("URL", url);
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+                Object objetos = restTemplate.getForObject(url, Object.class);
+                Log.i("RESPUESTA", objetos.toString());
+                LinkedHashMap<String,Object> respuesta = (LinkedHashMap<String,Object>) objetos;
+                usuario.setCodigo(String.valueOf(respuesta.get("codigo")));
+                usuario.setNombre(String.valueOf(respuesta.get("nombre")));
+                String valido = String.valueOf(respuesta.get("valido"));
                 if(valido.equals("true")){
                     usuario.setValido(true);
                 }else{
                     usuario.setValido(false);
                 }
-                usuario.setMensaje(String.valueOf(resSoap.getPropertySafely("mensaje")));
+                usuario.setMensaje(String.valueOf(respuesta.get("mensaje")));
             }
             catch (Exception e)
             {

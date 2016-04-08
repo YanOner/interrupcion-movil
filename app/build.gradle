@@ -16,9 +16,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-        repositories {
-            maven { url 'http://ksoap2-android.googlecode.com/svn/m2-repo' }
-        }
+        //repositories {
+        //    maven { url 'http://ksoap2-android.googlecode.com/svn/m2-repo' }
+        //}
     }
     packagingOptions {
         exclude 'META-INF/ASL2.0'
@@ -36,7 +36,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.android.support:design:23.0.1'
-    compile 'com.google.code.ksoap2-android:ksoap2-android:3.3.0'
     compile 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.3.2'
     compile 'commons-beanutils:commons-beanutils:1.8.0'
