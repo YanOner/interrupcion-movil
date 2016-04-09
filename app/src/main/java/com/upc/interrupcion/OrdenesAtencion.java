@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.upc.ingreso.MainActivity;
 import com.upc.ingreso.R;
+import com.upc.model.InterrupcionBean;
 import com.upc.model.OrdenAtencionBean;
 import com.upc.utility.services;
 
@@ -22,15 +23,18 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
 public class OrdenesAtencion extends AppCompatActivity {
 
-    public ArrayList<OrdenAtencionBean> ordenes;
+    public List<OrdenAtencionBean> ordenes;
     public ArrayList<String> lista = new ArrayList<>();
     public String seleccinado="";
     public String codigo="";
+    public String codigoInterrupcion="";
+    public String codigoCuadrilla="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +56,10 @@ public class OrdenesAtencion extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),
                         seleccinado, Toast.LENGTH_SHORT).show();
                 for (OrdenAtencionBean obj:ordenes) {
-                    if(obj.getDescripcion().contains(seleccinado)){
+                    if((obj.getDescripcion()+" - "+obj.getComentarios()).contains(seleccinado)){
                         codigo = obj.getCodigoOrden();
+                        codigoInterrupcion = obj.getCodigoInterrupcion();
+                        codigoCuadrilla = obj.getCodigoCuadrilla();
                         Intent i = new Intent(getApplicationContext(),OrdenAtencionDetalle.class);
                         i.putExtra("contenido", obj.toString());
                         startActivity(i);
@@ -67,58 +73,54 @@ public class OrdenesAtencion extends AppCompatActivity {
 
     public void atenderOrdenAtencion(View v){
         if(!seleccinado.equalsIgnoreCase("")){
-            Toast.makeText(getApplicationContext(), "OK", Toast.LENGTH_LONG).show();
+            new HttpRequestTaskAtender().execute();
         }else{
             Toast.makeText(getApplicationContext(),
                     "SELECCIONE UNA ORDEN", Toast.LENGTH_SHORT).show();
         }
     }
-    /*
-    public void regresar(View v){
-        finish();
-    }
-    */
 
     private class HttpRequestTask extends AsyncTask<Void, Void, List<OrdenAtencionBean>> {
         @Override
         protected List<OrdenAtencionBean> doInBackground(Void... params) {
             Log.i("doInBackground", "inicio");
+            List<OrdenAtencionBean> lista = new ArrayList<>();
             try {
                 String url = services.WOrdenAtencionLista + MainActivity.codigoUsuario +"/P";
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
                 Object objetos = restTemplate.getForObject(url, Object.class);
                 Log.i("RESPUESTA",objetos.toString());
-                LinkedHashMap<String,Object> respuesta = (LinkedHashMap<String,Object>) objetos;
-                Log.i("LinkedHashMap", respuesta.toString());
-                ArrayList<LinkedHashMap<String,String>> lista =
-                        (ArrayList<LinkedHashMap<String,String>>) respuesta.get("DTOOrdenAtencionList");
-                Log.i("ORDENES", lista.toString());
-                for (LinkedHashMap<String,String> lhm : lista) {
-                    Log.i("ORDEN", lhm.toString());
+                List<HashMap<String,Object>> respuesta = (List<HashMap<String, Object>>) objetos;
+                for (HashMap<String,Object> inter : respuesta) {
+                    Log.i("ATENCION", inter.toString());
                     OrdenAtencionBean nuevo = new OrdenAtencionBean();
-                    nuevo.setCodigoOrden(String.valueOf(lhm.get("CodigoOrden")));
-                    nuevo.setDescripcion(String.valueOf(lhm.get("Descripcion")));
-                    nuevo.setEstado(String.valueOf(lhm.get("Estado")));
-                    nuevo.setFecha(String.valueOf(lhm.get("Fecha")));
-                    ordenes.add(nuevo);
+                    nuevo.setCodigoOrden(String.valueOf(inter.get("codigo")));
+                    nuevo.setDescripcion(String.valueOf(inter.get("descripcion")));
+                    nuevo.setComentarios(String.valueOf(inter.get("comentario")));
+                    nuevo.setEstado(String.valueOf(inter.get("estado")));
+                    nuevo.setFecha(String.valueOf(inter.get("fecha")));
+                    nuevo.setCodigoInterrupcion(String.valueOf(inter.get("codigoInterrupcion")));
+                    nuevo.setCodigoCuadrilla(String.valueOf(inter.get("codigoCuadrilla")));
+                    nuevo.setCodigoUsuario(String.valueOf(inter.get("codigoUsuario")));
+                    lista.add(nuevo);
                 }
-                return ordenes;
+                return lista;
             } catch (Exception e) {
                 Log.i("Exception", "ERROR");
                 Log.e("HttpRequestTask", e.getMessage(), e);
             }
             Log.i("doInBackground", "fin");
-            return new ArrayList<>();
+            return lista;
         }
 
         @Override
-        protected void onPostExecute(List<OrdenAtencionBean> ordenes) {
+        protected void onPostExecute(List<OrdenAtencionBean> ordenesTask) {
             Log.i("onPostExecute", "inicio");
-            Log.i("LISTO",ordenes.toString());
+            Log.i("LISTO",ordenesTask.toString());
             lista = new ArrayList<>();
-            for (OrdenAtencionBean obj:ordenes) {
-                lista.add(obj.getDescripcion());
+            for (OrdenAtencionBean obj:ordenesTask) {
+                lista.add(obj.getDescripcion()+" - "+obj.getComentarios());
             }
             ListView listaViewOrdenes = (ListView) findViewById(R.id.listViewOrdenes);
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,lista);
@@ -129,9 +131,48 @@ public class OrdenesAtencion extends AppCompatActivity {
             }else{
                 tv.setText("SELECCIONE");
             }
+            ordenes = ordenesTask;
             Log.i("onPostExecute", "fin");
         }
 
     }
+    //ATENDER
+    private class HttpRequestTaskAtender extends AsyncTask<Void, Void, Boolean> {
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            Log.i("doInBackground", "inicio");
+            boolean exito = false;
+            try {
+                String url = services.WAtenderOrden + codigo + "/" + codigoInterrupcion + "/" +codigoCuadrilla;
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+                Object objetos = restTemplate.getForObject(url, Object.class);
+                Log.i("RESPUESTA",objetos.toString());
+                LinkedHashMap<String,Object> respuesta = (LinkedHashMap<String,Object>) objetos;
+                String valor = String.valueOf(respuesta.get("exito"));
+                if(valor.equals("true")){
+                    exito = true;
+                }
+            } catch (Exception e) {
+                Log.i("Exception", "ERROR");
+                Log.e("HttpRequestTask", e.getMessage(), e);
+            }
+            Log.i("doInBackground", "fin");
+            return exito;
+        }
 
+        @Override
+        protected void onPostExecute(Boolean exito) {
+            Log.i("onPostExecute", "inicio");
+            if(exito){
+                Toast.makeText(getApplicationContext(), "Proceso terminado exitosamente.", Toast.LENGTH_LONG).show();
+                finish();
+                startActivity(getIntent());
+            }else{
+                Toast.makeText(getApplicationContext(), "Ocurrió un error al procesar la información.", Toast.LENGTH_LONG).show();
+            }
+            Log.i("onPostExecute", "fin");
+        }
+
+    }
 }

@@ -68,7 +68,8 @@
             android:layout_gravity="center_horizontal"
             android:textColor="@android:color/background_light"
             android:textAlignment="center"
-            android:maxLength="10" />
+            android:maxLength="10"
+            android:hint="******" />
 
         <Space
             android:layout_width="match_parent"
@@ -96,7 +97,8 @@
             android:id="@+id/button2"
             android:background="@drawable/button"
             android:onClick="recuperarPassword"
-            style="@style/button_text"/>
+            style="@style/button_text"
+            android:visibility="invisible" />
 
     </LinearLayout>
 </RelativeLayout>

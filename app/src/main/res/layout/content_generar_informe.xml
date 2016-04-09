@@ -42,8 +42,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/editTextObservacion"
-                android:text="INGRESE SU OBSERVACIÓN"
-                android:background="#ffffff" />
+                android:background="#ffffff"
+                android:hint="INGRESE SU OBSERVACIÓN" />
 
         </LinearLayout>
 

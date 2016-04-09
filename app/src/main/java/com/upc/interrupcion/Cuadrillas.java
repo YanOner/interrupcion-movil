@@ -22,6 +22,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class Cuadrillas extends AppCompatActivity {
 
     public ArrayList<CuadrillaBean> cuadrillas;
     public ArrayList<String> lista = new ArrayList<>();
-    public String seleccinado="";
+    public static String seleccinado="";
     public String codigo="";
 
     @Override
@@ -39,6 +40,7 @@ public class Cuadrillas extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         cuadrillas = new ArrayList<>();
+        seleccinado="";
         new HttpRequestTask().execute();
 
         ListView listaViewCuadrillas = (ListView) findViewById(R.id.listViewCuadrillas);
@@ -67,17 +69,13 @@ public class Cuadrillas extends AppCompatActivity {
 
     public void asignarCuadrilla(View v){
         if(!seleccinado.equalsIgnoreCase("")){
-            Toast.makeText(getApplicationContext(), "LA CUADRILLA FUE ASIGNADA", Toast.LENGTH_LONG).show();
+            new HttpRequestTaskAsignar().execute();
         }else{
             Toast.makeText(getApplicationContext(),
                     "SELECCIONE UNA CUADRILLA", Toast.LENGTH_SHORT).show();
         }
     }
-/*
-    public void regresar(View v){
-        finish();
-    }
-*/
+
     private class HttpRequestTask extends AsyncTask<Void, Void, List<CuadrillaBean>> {
         @Override
         protected List<CuadrillaBean> doInBackground(Void... params) {
@@ -88,17 +86,13 @@ public class Cuadrillas extends AppCompatActivity {
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
                 Object objetos = restTemplate.getForObject(url, Object.class);
                 Log.i("RESPUESTA",objetos.toString());
-                LinkedHashMap<String,Object> respuesta = (LinkedHashMap<String,Object>) objetos;
-                Log.i("LinkedHashMap", respuesta.toString());
-                ArrayList<LinkedHashMap<String,String>> lista =
-                        (ArrayList<LinkedHashMap<String,String>>) respuesta.get("DTOCuadrillaList");
-                Log.i("CUADRILLAS", lista.toString());
-                for (LinkedHashMap<String,String> lhm : lista) {
+                List<HashMap<String,Object>> respuesta = (List<HashMap<String, Object>>) objetos;
+                for (HashMap<String,Object> lhm : respuesta) {
                     Log.i("CUADRILLA", lhm.toString());
                     CuadrillaBean nuevo = new CuadrillaBean();
-                    nuevo.setCodigoCuadrilla(String.valueOf(lhm.get("CodigoCuadrilla")));
-                    nuevo.setDescripcion(String.valueOf(lhm.get("Descripcion")));
-                    nuevo.setEstado(String.valueOf(lhm.get("Estado")));
+                    nuevo.setCodigoCuadrilla(String.valueOf(lhm.get("codigo")));
+                    nuevo.setDescripcion(String.valueOf(lhm.get("descripcion")));
+                    nuevo.setEstado(String.valueOf(lhm.get("estado")));
                     cuadrillas.add(nuevo);
                 }
                 return cuadrillas;
@@ -126,6 +120,44 @@ public class Cuadrillas extends AppCompatActivity {
                 tv.setText("NO SE ENCONTRARÓN CUADRILLAS");
             }else{
                 tv.setText("SELECCIONE");
+            }
+            Log.i("onPostExecute", "fin");
+        }
+
+    }
+
+    //ASIGNAR
+    private class HttpRequestTaskAsignar extends AsyncTask<Void, Void, Boolean> {
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            Log.i("doInBackground", "inicio");
+            boolean exito = false;
+            try {
+                String url = services.WAsignarCuadrilla + Interrupcion.codigo + "/" + codigo;
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+                Object objetos = restTemplate.getForObject(url, Object.class);
+                Log.i("RESPUESTA",objetos.toString());
+                LinkedHashMap<String,Object> respuesta = (LinkedHashMap<String,Object>) objetos;
+                String valor = String.valueOf(respuesta.get("exito"));
+                if(valor.equals("true")){
+                    exito = true;
+                }
+            } catch (Exception e) {
+                Log.i("Exception", "ERROR");
+                Log.e("HttpRequestTask", e.getMessage(), e);
+            }
+            Log.i("doInBackground", "fin");
+            return exito;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean exito) {
+            Log.i("onPostExecute", "inicio");
+            if(exito){
+                Toast.makeText(getApplicationContext(), "Proceso terminado exitosamente.", Toast.LENGTH_LONG).show();
+            }else{
+                Toast.makeText(getApplicationContext(), "Ocurrió un error al procesar la información.", Toast.LENGTH_LONG).show();
             }
             Log.i("onPostExecute", "fin");
         }

@@ -15,21 +15,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/button15"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Regresar"
-        android:id="@+id/button15"
-        android:layout_gravity="center_horizontal"
-        android:textColor="@android:color/background_light"
-        android:background="@android:color/holo_red_dark"
-        android:textAlignment="center"
-        android:onClick="regresar"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

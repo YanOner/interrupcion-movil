@@ -76,8 +76,6 @@ public class InterrupcionBean {
 				"CodigoInterrupcion='" + CodigoInterrupcion + '\'' +System.lineSeparator()+
 				"Descripcion='" + Descripcion + '\'' +System.lineSeparator()+
 				"Estado='" + Estado + '\'' +System.lineSeparator()+
-				"Latitud='" + Latitud + '\'' +System.lineSeparator()+
-				"Longitud='" + Longitud + '\'' +System.lineSeparator()+
 				"Fecha='" + Fecha + '\'' +System.lineSeparator();
 	}
 }

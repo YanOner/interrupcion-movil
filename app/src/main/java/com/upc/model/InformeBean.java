@@ -7,6 +7,33 @@ public class InformeBean {
     private String CodigoInforme;
     private String Descripcion;
     private String Detalle;
+    private String codigoOrden;
+    private String codigoInterrupcion;
+    private String codigoCuadrilla;
+
+    public String getCodigoOrden() {
+        return codigoOrden;
+    }
+
+    public void setCodigoOrden(String codigoOrden) {
+        this.codigoOrden = codigoOrden;
+    }
+
+    public String getCodigoInterrupcion() {
+        return codigoInterrupcion;
+    }
+
+    public void setCodigoInterrupcion(String codigoInterrupcion) {
+        this.codigoInterrupcion = codigoInterrupcion;
+    }
+
+    public String getCodigoCuadrilla() {
+        return codigoCuadrilla;
+    }
+
+    public void setCodigoCuadrilla(String codigoCuadrilla) {
+        this.codigoCuadrilla = codigoCuadrilla;
+    }
 
     public String getCodigoInforme() {
         return CodigoInforme;
@@ -34,9 +61,13 @@ public class InformeBean {
 
     @Override
     public String toString() {
-        return "Datos:" +System.lineSeparator()+
-                "CodigoInforme='" + CodigoInforme + '\'' +System.lineSeparator()+
-                "Descripcion='" + Descripcion + '\'' +System.lineSeparator()+
-                "Detalle='" + Detalle + '\'' +System.lineSeparator();
+        return "InformeBean{" +
+                "CodigoInforme='" + CodigoInforme + '\'' +
+                ", Descripcion='" + Descripcion + '\'' +
+                ", Detalle='" + Detalle + '\'' +
+                ", codigoOrden='" + codigoOrden + '\'' +
+                ", codigoInterrupcion='" + codigoInterrupcion + '\'' +
+                ", codigoCuadrilla='" + codigoCuadrilla + '\'' +
+                '}';
     }
 }

@@ -5,10 +5,16 @@ package com.upc.utility;
  */
 public class services {
 
-    public static String ValidarUsuario = "http://10.0.2.2:8080/ws-cxf-sgi/api/ws/WValidarUsuario/";
-    public static String WInterrupcionLista = "http://104.214.71.24:8080/RESTService/api/WInterrupcionLista/";
-    public static String WOrdenAtencionLista = "http://104.214.71.24:8080/RESTService/api/WOrdenAtencionLista/";
-    public static String WOrdenAtencionInterrupcion = "http://104.214.71.24:8080/RESTService/api/WOrdenAtencionInterrupcion/";
-    public static String WCuadrillaLista = "http://104.214.71.24:8080/RESTService/api/WCuadrillaLista/";
+    //public static String rutaWS = "http://10.0.2.2:8080";
+    public static String rutaWS = "http://192.168.1.3:8080";
 
+    public static String WValidarUsuario = rutaWS + "/WValidarUsuario/";
+    public static String WInterrupcionLista = rutaWS + "/WInterrupcionLista/";
+    public static String WOrdenAtencionLista = rutaWS + "/WOrdenAtencionLista/";
+    public static String WOrdenAtencionInterrupcion = rutaWS + "/WOrdenAtencionInterrupcion/";
+    public static String WCuadrillaLista = rutaWS + "/WCuadrillaLista/";
+
+    public static String WAsignarCuadrilla = rutaWS + "/WAsignarCuadrilla/";
+    public static String WAtenderOrden= rutaWS + "/WAtenderOrden/";
+    public static String WEnviarOrden= rutaWS + "/WEnviarOrden/";
 }

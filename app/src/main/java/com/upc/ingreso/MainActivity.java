@@ -15,13 +15,8 @@ import android.widget.Toast;
 import com.upc.model.Usuario;
 import com.upc.utility.services;
 
-import org.ksoap2.SoapEnvelope;
-import org.ksoap2.serialization.SoapObject;
-import org.ksoap2.serialization.SoapSerializationEnvelope;
-import org.ksoap2.transport.HttpTransportSE;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
-
 
 import java.util.LinkedHashMap;
 
@@ -96,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(Usuario usuario) {
             Log.e("onPostExecute", "Response from server: " + usuario.toString());
             //PRUEBA
-            usuario.setValido(true);
+            //usuario.setValido(true);
             if(usuario.getValido()){
                 codigoUsuario = usuario.getCodigo();
                 nombreUsuario = usuario.getNombre();
@@ -119,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
             Log.i("doInBackground", "inicio");
             try {
                 //String url = "http://104.214.71.24:8080/RESTService/api/WInterrupcionLista/"+ MainActivity.codigoUsuario +"/D";
-                String url = services.ValidarUsuario+usuarioLogin+"/"+password;
+                String url = services.WValidarUsuario+usuarioLogin+"/"+password;
                 Log.i("URL", url);
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());

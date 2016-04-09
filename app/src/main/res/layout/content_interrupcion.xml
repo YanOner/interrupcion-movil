@@ -45,7 +45,8 @@
             android:text="CONSULTAR CUADRILLAS DISPONIBLES"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            style="@style/button_text" />
+            style="@style/button_text"
+            android:onClick="irConsultarCuadrilla" />
 <!--
         <Button
             android:background="@drawable/button"

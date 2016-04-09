@@ -40,8 +40,8 @@ public class Interrupcion extends AppCompatActivity {
 
     public List<InterrupcionBean> interrupciones;
     public ArrayList<String> lista = new ArrayList<>();
-    public String seleccinado="";
-    public String codigo="";
+    public static String seleccinado="";
+    public static String codigo="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +50,7 @@ public class Interrupcion extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         interrupciones = new ArrayList<>();
+        seleccinado="";
         new HttpRequestTask().execute();
 
         ListView listaViewInterrupciones = (ListView) findViewById(R.id.listViewInterrupciones);
@@ -79,7 +80,6 @@ public class Interrupcion extends AppCompatActivity {
 
     public void irConsultarCuadrilla(View v){
 
-        seleccinado = " ";
         if(!seleccinado.equalsIgnoreCase("")){
             Intent i = new Intent(this,Cuadrillas.class);
             startActivity(i);
@@ -104,20 +104,14 @@ public class Interrupcion extends AppCompatActivity {
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
                 Object objetos = restTemplate.getForObject(url, Object.class);
                 Log.i("RESPUESTA",objetos.toString());
-                LinkedHashMap<String,Object> respuesta = (LinkedHashMap<String,Object>) objetos;
-                Log.i("LinkedHashMap", respuesta.toString());
-                ArrayList<LinkedHashMap<String,String>> lista =
-                        (ArrayList<LinkedHashMap<String,String>>) respuesta.get("DTOInterrupcionList");
-                Log.i("INTERRUPCIONES", lista.toString());
-                for (LinkedHashMap<String,String> inter : lista) {
+                List<HashMap<String,Object>> respuesta = (List<HashMap<String, Object>>) objetos;
+                for (HashMap<String,Object> inter : respuesta) {
                     Log.i("INTERRUPCION", inter.toString());
                     InterrupcionBean nuevo = new InterrupcionBean();
-                    nuevo.setCodigoInterrupcion(String.valueOf(inter.get("CodigoInterrupcion")));
-                    nuevo.setDescripcion(String.valueOf(inter.get("Descripcion")));
-                    nuevo.setEstado(String.valueOf(inter.get("Estado")));
-                    nuevo.setLatitud(String.valueOf(inter.get("Latitud")));
-                    nuevo.setLongitud(String.valueOf(inter.get("Longitud")));
-                    nuevo.setFecha(String.valueOf(inter.get("Fecha")));
+                    nuevo.setCodigoInterrupcion(String.valueOf(inter.get("codigo")));
+                    nuevo.setDescripcion(String.valueOf(inter.get("descripcion")));
+                    nuevo.setEstado(String.valueOf(inter.get("estado")));
+                    nuevo.setFecha(String.valueOf(inter.get("fecha")));
                     interrupciones.add(nuevo);
                 }
                 return interrupciones;
