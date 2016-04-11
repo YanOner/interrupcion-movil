@@ -7,7 +7,7 @@ public class services {
     //Local
     //public static String rutaWS = "http://10.0.2.2:8080";
     //Nube
-    public static String rutaWS = "http://http://104.208.233.67/:8080";
+    public static String rutaWS = "http://104.208.233.67:8080";
 
     public static String WValidarUsuario = rutaWS + "/WValidarUsuario/";
     public static String WInterrupcionLista = rutaWS + "/WInterrupcionLista/";
